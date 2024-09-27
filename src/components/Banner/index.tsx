@@ -1,20 +1,17 @@
-import { Imagem, Precos, Titulo } from './styles'
-
-import bannerImg from '../../assets/images/banner-homem-aranha.png'
 import Tag from '../Tag'
 import { ButtonLink } from '../Button/styles'
-import { Game } from '../../pages/Home'
-import { useEffect, useState } from 'react'
-
-import { formataPreco } from '../ProductsList'
 
 import { useGetFeaturedGameQuery } from '../../services/api'
 
+import { Imagem, Precos, Titulo } from './styles'
+import { parseToBrl } from '../../utils'
+import Loader from '../Loader'
+
 const Banner = () => {
-  const { data: game, isLoading } = useGetFeaturedGameQuery()
+  const { data: game } = useGetFeaturedGameQuery()
 
   if (!game) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   }
 
   return (
@@ -24,8 +21,8 @@ const Banner = () => {
         <div>
           <Titulo>{game.name}</Titulo>
           <Precos>
-            De <span>{formataPreco(game.prices.old)}</span> <br />
-            por apenas {formataPreco(game.prices.current)}
+            De <span>{parseToBrl(game.prices.old)}</span> <br />
+            por apenas {parseToBrl(game.prices.current)}
           </Precos>
         </div>
         <ButtonLink
