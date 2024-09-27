@@ -429,7 +429,10 @@ const Checkout = () => {
                           }
                         >
                           {installments.map((installment) => (
-                            <option value={installment.quantity} key={installment.quantity}>
+                            <option
+                              value={installment.quantity}
+                              key={installment.quantity}
+                            >
                               {installment.quantity}x de{' '}
                               {installment.formattedAmount}
                             </option>
